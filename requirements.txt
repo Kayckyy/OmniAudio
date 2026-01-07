@@ -1,0 +1,8 @@
+numpy
+scipy
+soundfile
+pydub
+# demucs  # Opcional - requer instalação manual
+ffmpeg
+PyQt5
+Pillow

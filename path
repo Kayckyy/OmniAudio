@@ -1,0 +1,20 @@
+Omni/
+  data/
+    hrtf/
+    D1_HRIR_WAV/
+        (IR's SADIE II)
+  src/
+    core/
+      _init_.py
+      math_utils.py
+      omni_format.py
+    dsp/
+      _init_.py
+      processor.py
+      hrtf_engine.py
+    utils/
+      audio_io.py
+      separator.py
+  _init_.py
+main.py
+requeriments.txt (vazio ainda).

@@ -1,0 +1,37 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="128" cy="128" r="120" fill="url(#grad1)" />
+  
+  <!-- Sound waves -->
+  <path d="M 80 128 Q 90 100, 110 100 T 140 128 T 170 156 T 200 156" 
+        stroke="white" stroke-width="4" fill="none" opacity="0.9"/>
+  <path d="M 70 128 Q 80 90, 105 90 T 135 128 T 165 166 T 195 166" 
+        stroke="white" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 60 128 Q 70 80, 100 80 T 130 128 T 160 176 T 190 176" 
+        stroke="white" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Center speaker/headphones symbol -->
+  <circle cx="128" cy="128" r="25" fill="white" opacity="0.95"/>
+  <circle cx="128" cy="128" r="20" fill="url(#grad2)"/>
+  
+  <!-- Audio nodes -->
+  <circle cx="90" cy="100" r="8" fill="white" opacity="0.9"/>
+  <circle cx="166" cy="156" r="8" fill="white" opacity="0.9"/>
+  <circle cx="200" cy="156" r="6" fill="white" opacity="0.8"/>
+  <circle cx="60" cy="128" r="6" fill="white" opacity="0.8"/>
+  
+  <!-- 3D effect elements -->
+  <ellipse cx="128" cy="180" rx="40" ry="8" fill="black" opacity="0.2"/>
+  <text x="128" y="135" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">3D</text>
+</svg>

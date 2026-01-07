@@ -1,0 +1,56 @@
+# Arquivos de áudio e vídeo (gerados pelo processamento)
+*.wav
+*.mp3
+*.flac
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.webm
+
+# Arquivos de configuração e saída
+*.omni
+*.zip
+*.rar
+*.7z
+
+# Arquivos temporários e de cache
+temp/
+projects/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de log
+*.log
+logs/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos de teste
+test_*
+*_test.*
+test_output/
+debug_output/
+
+# Arquivos de backup
+*.bak
+*.backup
+*_old.*
+*_backup.*
+
+# Arquivos de documentação gerada
+docs/_build/
+*.egg-info/
+dist/
+build/   

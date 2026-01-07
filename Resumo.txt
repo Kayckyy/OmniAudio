@@ -1,0 +1,55 @@
+# 📂 Projeto: OmniAudio (Object-Based Music Navigation & Interpolation)
+
+### 🎯 O Conceito
+O OmniAudio é um sistema de Áudio Baseado em Objetos acessível (similar à filosofia do Dolby Atmos). Em vez de "queimar" a mixagem em um arquivo estéreo fixo, o OmniAudio mantém os instrumentos separados (Stems) e usa um arquivo de metadados (.omni) para definir como eles se comportam no espaço 3D.
+
+A Filosofia: "O arquivo .omni é a partitura; o player decide como tocar baseada nas caixas de som do usuário."
+
+---
+
+### 🏗️ Arquitetura do Código (Python)
+
+O projeto está modularizado na pasta src/:
+
+1. main.py (O Maestro):
+* Gerencia a CLI (Linha de Comando).
+* Modos: auto (Separa com Demucs + Criação), create_multi (Criação manual), process_multi (Renderização).
+* Calcula a duração total baseada no stem mais longo.
+2. core/omni_format.py (O Protocolo):
+* Gera o JSON .omni.
+* Sistema de Roles (Papéis): Detecta automaticamente se o áudio é anchor (Voz - Fixo), lfe_focused (Baixo - Fixo), spatial (Instrumentos - Girando) ou ethereal (Ambiência - Flutuando).
+3. dsp/processor.py (O Motor de Áudio):
+* Engine Híbrida: Alterna entre Convolução HRTF (para fones/3D) e Panning de Amplitude (para 5.1/Estéreo) para evitar problemas de fase.
+* XTC (Crosstalk Cancellation): Algoritmo de cancelamento de fase com filtro de banda (Low-Pass em 2.2kHz) para projetar som 3D em TVs e Soundbars.
+* Virtual Speakers: Algoritmo para alargar o estéreo fixo usando HRTF + Head Shadowing.
+4. dsp/hrtf_engine.py:
+* Carrega e interpola o dataset de respostas de impulso (HRIR) para simular a audição humana.
+5. utils/separator.py:
+* Automação do Demucs (Meta) para separar músicas em até 6 stems (Voz, Baixo, Bateria, Guitarra, Piano, Outros).
+
+---
+
+### 🎛️ Modos de Renderização (Outputs)
+
+O sistema consegue gerar 5 formatos diferentes a partir do mesmo arquivo .omni:
+
+| Comando (--format) | Tecnologia Usada | Público Alvo | Descrição |
+| :--- | :--- | :--- | :--- |
+| binaural | HRTF Dinâmico | 🎧 Fones | Objetos giram 360° ao redor da cabeça. Imersão total. |
+| static_binaural | HRTF Estático | 🎧 Fones | Estéreo "Wide". L e R fixos em ângulos abertos. Som de estúdio. |
+| speaker_3d | HRTF + XTC | 📺 TV / Soundbar | Transaural. O som sai da TV e vai para as paredes laterais. |
+| static_speaker | HRTF + XTC | 📺 TV / Soundbar | Caixas virtuais largas. Expande o palco sonoro da TV. |
+| 5.1 | Amplitude Panning | 🏠 Home Theater | Distribui o som para 6 caixas físicas reais (L, R, C, LFE, Ls, Rs). |
+
+---
+
+### 🧠 Lógicas Avançadas Implementadas
+
+1. Estabilidade de Fase (Safe Mode XTC):
+* O cancelamento de crosstalk só atua nas frequências médias (onde o 3D acontece). Agudos passam limpos para evitar som "metalizado" ou "phaser".
+2. Preservação de Estéreo:
+* Nos modos estáticos (static_*), o sistema não converte para mono. Ele espacializa o canal L na esquerda e o R na direita, mantendo a mixagem original rica.
+3. Roles Inteligentes:
+* Voz (anchor) e Baixo (lfe_focused) nunca giram aleatoriamente. Eles ficam travados no centro para manter o "punch" e a inteligibilidade da música.
+4. Potência Constante:
+* O panning usa leis de seno/cosseno para garantir que o volume não caia quando o som passa entre duas caixas.
