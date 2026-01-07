@@ -1,5 +1,5 @@
 # Arquivos de áudio e vídeo (gerados pelo processamento)
-*.wav
+# Mantendo arquivos IR essenciais para HRTF
 *.mp3
 *.flac
 *.mp4
